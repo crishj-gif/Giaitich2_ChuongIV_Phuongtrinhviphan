@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương IV: Phương Trình Vi Phân (PTVP)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'mathjax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        /* Custom styling for the details/summary toggle button */
+        details summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #1e40af; /* Blue-700 */
+            transition: color 0.2s;
+        }
+        details summary:hover {
+            color: #1d4ed8; /* Blue-800 */
+        }
+        details[open] summary {
+            border-bottom: none;
+        }
+        details summary::before {
+            content: "▶ ";
+            font-size: 0.8rem;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        details[open] summary::before {
+            content: "▼ ";
+            transform: rotate(0deg);
+        }
+        .solution-step {
+            padding: 0.5rem 0;
+            border-left: 3px solid #60a5fa; /* Blue-400 */
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+            background-color: #eff6ff; /* Blue-50 */
+            border-radius: 0.5rem;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .phone-link {
+            background-color: #25D366; /* WhatsApp Green / Vibrant Green */
+            color: white;
+        }
+        .phone-link:hover {
+            background-color: #128C7E;
+        }
+
+        .instagram-link {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            box-shadow: 0 4px 10px rgba(220, 39, 67, 0.4); /* Shadow hồng nhẹ */
+        }
+        .instagram-link:hover {
+            opacity: 0.9;
+        }
+
+        .facebook-link {
+            background-color: #1877F2; /* Facebook Blue */
+            color: white;
+        }
+        .facebook-link:hover {
+            background-color: #166FE5;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 md:p-10">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 border-b-4 border-blue-600 pb-2 mb-8">
+            Chương IV: Phương Trình Vi Phân
+        </h1>
+        <p class="text-gray-600 mb-6">
+            Tài liệu này tổng hợp các dạng cơ bản, phương pháp giải, và các trường hợp đặc trưng của Phương trình Vi phân cấp 1 và cấp 2, kèm theo 20 bài tập vận dụng có lời giải chi tiết.
+        </p>
+
+        <!-- I. PTVP Cấp 1 -->
+        <h2 class="text-2xl font-bold text-blue-700 mt-8 mb-4">I. Phương Trình Vi Phân Cấp 1</h2>
+        <p class="mb-4">PTVP Cấp 1 có dạng tổng quát $F(x, y, y') = 0$.</p>
+        
+        
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-3">1. 5 Dạng Cơ Bản và Cách Giải Tổng Quan</h3>
+        <div class="table-responsive">
+            <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow">
+                <thead class="bg-blue-50">
+                    <tr>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">Dạng PTVP</th>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">Phương Trình Tổng Quát</th>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-7/12">Phương Pháp Giải Quyết</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900"><strong>1. Tách Biến</strong></td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700">$M(x)dx + N(y)dy = 0$</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">Tích phân trực tiếp hai vế: $\int M(x)dx + \int N(y)dy = C$</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900"><strong>2. Thuần Nhất</strong></td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700">$y' = f\left(\frac{y}{x}\right)$</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">Đặt ẩn phụ $u = \frac{y}{x}$. Chuyển về dạng Tách Biến.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900"><strong>3. Tuyến Tính</strong></td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700">$y' + p(x)y = q(x)$</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">Dùng Thừa số tích phân $\mu(x) = e^{\int p(x)dx}$.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900"><strong>4. Bernoulli</strong></td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700">$y' + p(x)y = q(x)y^n$</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">Đặt ẩn phụ $z = y^{1-n}$. Chuyển về dạng Tuyến tính cấp 1 theo $z$.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900"><strong>5. Vi Phân Toàn Phần</strong></td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700">$P(x, y)dx + Q(x, y)dy = 0$</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">Kiểm tra $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$. Nghiệm $u(x, y) = C$.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-3">2. Cách Giải Chi Tiết Từng Dạng PTVP Cấp 1</h3>
+
+        <div class="space-y-6">
+            <!-- Dạng 1: Tách Biến (Separable) -->
+            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200 shadow-md">
+                <h4 class="font-bold text-lg text-blue-800 border-b pb-2 mb-3">Dạng 1: Phương Trình Tách Biến</h4>
+                <p class="mb-3">Dạng: $$A(x)dx + B(y)dy = 0$$</p>
+                <div class="space-y-3 text-gray-700">
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 1: Tách Biến</p>
+                        <p>Đảm bảo phương trình đã được tách hoàn toàn thành một hàm chỉ chứa $x$ nhân $dx$ và một hàm chỉ chứa $y$ nhân $dy$.</p>
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 2: Tích Phân Hai Vế</p>
+                        <p>Lấy tích phân cho từng vế và cộng hằng số tích phân $C$ vào một bên (thường là vế phải):</p>
+                        $$\int A(x)dx + \int B(y)dy = C$$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dạng 2: Thuần Nhất (Homogeneous) -->
+            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200 shadow-md">
+                <h4 class="font-bold text-lg text-blue-800 border-b pb-2 mb-3">Dạng 2: Phương Trình Thuần Nhất</h4>
+                <p class="mb-3">Dạng: $$y' = f\left(\frac{y}{x}\right)$$</p>
+                <div class="space-y-3 text-gray-700">
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 1: Đặt Ẩn Phụ</p>
+                        <p>Đặt $u = \frac{y}{x}$. Suy ra $y = ux$. Lấy đạo hàm hai vế theo $x$:</p>
+                        $$y' = u'x + u$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 2: Đưa về Dạng Tách Biến</p>
+                        <p>Thay $y'$ và $\frac{y}{x}$ vào PTVP, sau đó tách biến $u$ và $x$:</p>
+                        $$u'x + u = f(u) \Rightarrow \frac{du}{f(u) - u} = \frac{dx}{x}$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 3: Tích Phân và Kết Luận</p>
+                        <p>Giải PTVP Tách Biến theo $u$ và $x$. Sau đó thay $u = \frac{y}{x}$ trở lại để có nghiệm tổng quát $y(x)$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dạng 3: Tuyến Tính (Linear) -->
+            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200 shadow-md">
+                <h4 class="font-bold text-lg text-blue-800 border-b pb-2 mb-3">Dạng 3: Phương Trình Tuyến Tính Cấp 1 (PTVP Tổng Quát)</h4>
+                <p class="mb-3">Dạng: $$y' + p(x)y = q(x)$$</p>
+                <div class="space-y-3 text-gray-700">
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 1: Tìm Thừa Số Tích Phân $\mu(x)$</p>
+                        <p>Tính thừa số tích phân theo công thức:</p>
+                        $$\mu(x) = e^{\int p(x)dx}$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 2: Biến Đổi PTVP</p>
+                        <p>Nhân hai vế của PTVP với $\mu(x)$. Vế trái sẽ trở thành đạo hàm của tích $(\mu(x)y)$:</p>
+                        $$(\mu(x)y)' = \mu(x)q(x)$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 3: Tích Phân và Kết Luận Nghiệm</p>
+                        <p>Tích phân hai vế và giải ra $y$:</p>
+                        $$y(x) = \frac{1}{\mu(x)}\left(\int \mu(x)q(x)dx + C\right)$$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dạng 4: Bernoulli -->
+            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200 shadow-md">
+                <h4 class="font-bold text-lg text-blue-800 border-b pb-2 mb-3">Dạng 4: Phương Trình Bernoulli</h4>
+                <p class="mb-3">Dạng: $$y' + p(x)y = q(x)y^n \quad (n \ne 0, 1)$$</p>
+                <div class="space-y-3 text-gray-700">
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 1: Đưa về Dạng Chuẩn và Đặt Ẩn Phụ</p>
+                        <p>Chia hai vế cho $y^n$. Đặt ẩn phụ $z = y^{1-n}$. Đạo hàm $z$ theo $x$:</p>
+                        $$z' = (1-n)y^{-n}y'$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 2: Chuyển về Tuyến Tính Cấp 1</p>
+                        <p>Thay $z$ và $z'$ vào phương trình đã chia. Ta thu được PTVP Tuyến Tính cấp 1 theo biến $z$:</p>
+                        $$z' + (1-n)p(x)z = (1-n)q(x)$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 3: Giải và Trả lại Biến cũ</p>
+                        <p>Giải PTVP Tuyến Tính theo $z$ (sử dụng phương pháp Thừa số tích phân). Cuối cùng, thay $z = y^{1-n}$ trở lại để có nghiệm tổng quát $y(x)$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dạng 5: Vi Phân Toàn Phần (Exact) -->
+            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200 shadow-md">
+                <h4 class="font-bold text-lg text-blue-800 border-b pb-2 mb-3">Dạng 5: Phương Trình Vi Phân Toàn Phần</h4>
+                <p class="mb-3">Dạng: $$P(x, y)dx + Q(x, y)dy = 0$$</p>
+                <div class="space-y-3 text-gray-700">
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 1: Kiểm Tra Điều Kiện</p>
+                        <p>Kiểm tra điều kiện cần và đủ của Vi phân Toàn Phần:</p>
+                        $$\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 2: Tìm Hàm $u(x, y)$</p>
+                        <p>Tìm hàm $u(x, y)$ thỏa $du = Pdx + Qdy$ bằng cách tích phân $P$ theo $x$ và thêm hàm $f(y)$:</p>
+                        $$u(x, y) = \int P(x, y)dx + f(y)$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 3: Xác Định $f(y)$</p>
+                        <p>Đạo hàm $u(x, y)$ theo $y$ và cho bằng $Q(x, y)$ để tìm $f'(y)$, sau đó tích phân để tìm $f(y)$:</p>
+                        $$\frac{\partial u}{\partial y} = Q(x, y) \Rightarrow \frac{\partial}{\partial y}\left(\int P(x, y)dx\right) + f'(y) = Q(x, y)$$
+                    </div>
+                    <div class="p-3 bg-white rounded-md border">
+                        <p class="font-bold text-md text-green-700">Bước 4: Kết Luận Nghiệm Dạng Ẩn</p>
+                        <p>Nghiệm tổng quát của phương trình là:</p>
+                        $$u(x, y) = C$$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- II. PTVP Cấp 2 -->
+        <h2 class="text-2xl font-bold text-blue-700 mt-10 mb-4">II. Phương Trình Vi Phân Cấp 2 Tuyến Tính Thuần Nhất</h2>
+        <p class="mb-4">PTVP cấp 2 tuyến tính thuần nhất với hệ số hằng số có dạng: $ay'' + by' + cy = 0$.</p>
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-3">1. Các Trường Hợp của Phương Trình Đặc Trưng (PTĐT)</h3>
+        <p class="mb-4">PTĐT tương ứng là $a\lambda^2 + b\lambda + c = 0$. Nghiệm tổng quát $y_h(x)$ của PTVP phụ thuộc vào nghiệm của PTĐT.</p>
+        
+        
+        <div class="table-responsive">
+            <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow">
+                <thead class="bg-blue-50">
+                    <tr>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-6/12">Trường Hợp Nghiệm PTĐT ($\Delta = b^2 - 4ac$)</th>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-6/12">Nghiệm Tổng Quát $y_h(x)$</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-3 py-4 text-sm text-gray-700"><strong>1. Hai nghiệm thực phân biệt</strong> ($\Delta > 0$, $\lambda_1 \ne \lambda_2 \in \mathbb{R}$)</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">$$y_h(x) = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x}$$</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 text-sm text-gray-700"><strong>2. Nghiệm thực kép</strong> ($\Delta = 0$, $\lambda_1 = \lambda_2 = \lambda \in \mathbb{R}$)</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">$$y_h(x) = (C_1 + C_2 x) e^{\lambda x}$$</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 text-sm text-gray-700"><strong>3. Hai nghiệm phức liên hợp</strong> ($\Delta < 0$, $\lambda_{1, 2} = \alpha \pm i\beta$)</td>
+                        <td class="px-3 py-4 text-sm text-gray-700">$$y_h(x) = e^{\alpha x} (C_1 \cos(\beta x) + C_2 \sin(\beta x))$$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2 class="text-2xl font-bold text-blue-700 mt-10 mb-4">
+    III. Phương Trình Vi Phân Cấp 2 Tuyến Tính Không Thuần Nhất ⚙️
+</h2>
+
+<p class="mb-4">
+    PTVP Cấp 2 Tuyến tính Không thuần nhất có dạng: 
+    <span class="font-bold">$ay'' + by' + cy = f(x)$</span>, với $f(x) \ne 0$.
+</p>
+<p class="mb-4">
+    Nghiệm Tổng Quát $y(x)$ là tổng của <strong>Nghiệm Thuần Nhất</strong> $y_h(x)$ (nghiệm của phương trình thuần nhất tương ứng) và một <strong>Nghiệm Riêng</strong> $y_p(x)$:
+</p>
+<p class="mb-4 text-center text-lg font-mono">
+    $$y(x) = y_h(x) + y_p(x)$$
+</p>
+
+<h3 class="text-xl font-semibold text-gray-700 mt-6 mb-3">
+    1. Các Bước Giải PTVPTT Không Thuần Nhất
+</h3>
+<div class="table-responsive">
+    <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow">
+        <thead class="bg-red-50">
+            <tr>
+                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">Bước</th>
+                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/4">Mô Tả Chi Tiết</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+                <td class="px-3 py-4 text-sm font-bold text-gray-800">B1: Nghiệm Thuần Nhất ($y_h$)</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    Giải phương trình thuần nhất $ay'' + by' + cy = 0$ (sử dụng Phương trình Đặc trưng).
+                </td>
+            </tr>
+            <tr>
+                <td class="px-3 py-4 text-sm font-bold text-gray-800">B2: Nghiệm Riêng ($y_p$)</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    Tìm một nghiệm riêng $y_p(x)$ của phương trình không thuần nhất $ay'' + by' + cy = f(x)$. Phương pháp thường dùng là <strong>Phương pháp Hệ số Bất định</strong>.
+                </td>
+            </tr>
+            <tr>
+                <td class="px-3 py-4 text-sm font-bold text-gray-800">B3: Kết Luận</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    Nghiệm tổng quát là $y(x) = y_h(x) + y_p(x)$.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="text-xl font-semibold text-gray-700 mt-6 mb-3">
+    2. Tìm Nghiệm Riêng $y_p(x)$ bằng Phương pháp Hệ số Bất định
+</h3>
+<p class="mb-4">
+    Áp dụng khi $f(x)$ có dạng đặc biệt (đa thức, hàm mũ, lượng giác hoặc tích của chúng). Nghiệm riêng giả định $y_p(x)$ được chọn theo bảng dưới, sau đó đạo hàm và thay vào PTVP để xác định các hệ số.
+</p>
+
+<div class="table-responsive">
+    <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow">
+        <thead class="bg-yellow-50">
+            <tr>
+                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">Dạng của $f(x)$</th>
+                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-8/12">Dạng giả định của $y_p(x)$</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+                <td class="px-3 py-4 text-sm text-gray-700"><strong>Đa thức:</strong> $P_n(x)$</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    $$y_p(x) = x^k Q_n(x)$$
+                </td>
+            </tr>
+            <tr>
+                <td class="px-3 py-4 text-sm text-gray-700"><strong>Hàm mũ:</strong> $P_n(x) e^{\alpha x}$</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    $$y_p(x) = x^k Q_n(x) e^{\alpha x}$$
+                </td>
+            </tr>
+            <tr>
+                <td class="px-3 py-4 text-sm text-gray-700"><strong>Lượng giác/Hỗn hợp:</strong> $e^{\alpha x} [P_n(x) \cos(\beta x) + Q_m(x) \sin(\beta x)]$</td>
+                <td class="px-3 py-4 text-sm text-gray-700">
+                    $$y_p(x) = x^k e^{\alpha x} [R_N(x) \cos(\beta x) + S_N(x) \sin(\beta x)]$$
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<blockquote class="mt-4 p-3 border-l-4 border-blue-500 bg-blue-50">
+    <p class="text-sm italic text-gray-600">
+        Trong đó: $Q_n(x)$, $R_N(x)$, $S_N(x)$ là các đa thức đầy đủ với hệ số cần tìm; $N = \max(n, m)$.
+    </p>
+    <p class="text-sm font-bold mt-2 text-gray-800">
+        Hệ số $k$: là số lần $\lambda$ (hoặc $\alpha \pm i\beta$) là nghiệm của Phương trình Đặc trưng thuần nhất. 
+        $k=0$ (không phải nghiệm), $k=1$ (nghiệm đơn), $k=2$ (nghiệm kép).
+    </p>
+</blockquote>
+
+        <!-- III. 20 Bài Tập Vận Dụng -->
+        <h2 class="text-2xl font-bold text-blue-700 mt-10 mb-4">III. Bài Tập Vận Dụng</h2>
+        
+        <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-3">A. PTVP Cấp 1 (15 Bài)</h3>
+
+        <!-- Dạng 1: Tách Biến -->
+        <h4 class="text-lg font-medium text-gray-700 mt-4 mb-2">1. Dạng Tách Biến (4 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 1 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 1:</strong> Giải phương trình: $(x^2 + 1)dy = y dx$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tách Biến</strong></p>
+                        <p>Biến đổi phương trình:</p>
+                        $$\frac{dy}{y} = \frac{dx}{x^2 + 1}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tích Phân Hai Vế</strong></p>
+                        <p>Lấy tích phân hai vế:</p>
+                        $$\int \frac{dy}{y} = \int \frac{dx}{x^2 + 1}$$
+                        $$\ln|y| = \arctan(x) + C_0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Kết Luận Nghiệm Tổng Quát</strong></p>
+                        <p>Nghiệm tổng quát là:</p>
+                        $$y = C e^{\arctan(x)} \quad (\text{Với } C = \pm e^{C_0} \text{ hoặc } C=0)$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 2 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 2:</strong> Giải phương trình: $y' \sin(x) = y \ln(y)$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tách Biến</strong></p>
+                        $$\frac{dy}{y \ln(y)} = \frac{dx}{\sin(x)}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tích Phân Hai Vế</strong></p>
+                        <p>Sử dụng tích phân $\int \frac{du}{u} = \ln|u|$ với $u=\ln(y)$ cho vế trái:</p>
+                        $$\int \frac{d(\ln y)}{\ln y} = \int \frac{dx}{\sin(x)}$$
+                        $$\ln|\ln(y)| = \ln\left|\tan\left(\frac{x}{2}\right)\right| + \ln|C|$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Rút Gọn Nghiệm</strong></p>
+                        <p>Sử dụng tính chất $\ln(A) = \ln(B) \Rightarrow A = B$:</p>
+                        $$\ln(y) = C \tan\left(\frac{x}{2}\right)$$
+                        $$y = e^{C \tan(x/2)}$$
+                    </div>
+                </details>
+            </div>
+            
+            <!-- Bài 3 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 3:</strong> Giải phương trình: $e^y(1 + x^2) dy = 2x(1 + e^y) dx$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tách Biến</strong></p>
+                        $$\frac{e^y}{1 + e^y} dy = \frac{2x}{1 + x^2} dx$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tích Phân Hai Vế</strong></p>
+                        $$\int \frac{e^y}{1 + e^y} dy = \int \frac{2x}{1 + x^2} dx$$
+                        $$\ln|1 + e^y| = \ln|1 + x^2| + \ln|C|$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Kết Luận Nghiệm Dạng Ẩn</strong></p>
+                        <p>Sử dụng $\ln(A) = \ln(B) + \ln(C) = \ln(BC)$:</p>
+                        $$1 + e^y = C (1 + x^2)$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 4 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 4:</strong> Giải phương trình: $y' = y^2 \sin(x)$ với điều kiện $y(0) = 1$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tách Biến và Tích Phân</strong></p>
+                        $$\frac{dy}{y^2} = \sin(x) dx$$
+                        $$\int \frac{dy}{y^2} = \int \sin(x) dx$$
+                        $$-\frac{1}{y} = -\cos(x) + C$$
+                        $$\frac{1}{y} = \cos(x) - C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Xác Định Hằng Số $C$</strong></p>
+                        <p>Thay điều kiện ban đầu $x=0, y=1$ vào nghiệm tổng quát:</p>
+                        $$\frac{1}{1} = \cos(0) - C \Rightarrow 1 = 1 - C \Rightarrow C = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Kết Luận Nghiệm Riêng</strong></p>
+                        <p>Thay $C=0$ vào nghiệm tổng quát:</p>
+                        $$\frac{1}{y} = \cos(x)$$
+                        $$y = \sec(x)$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 2: Thuần Nhất -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">2. Dạng Thuần Nhất (3 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 5 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 5:</strong> Giải phương trình: $xy' = y + x \cos^2\left(\frac{y}{x}\right)$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Chuẩn Thuần Nhất</strong></p>
+                        $$y' = \frac{y}{x} + \cos^2\left(\frac{y}{x}\right)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Đặt Ẩn Phụ</strong></p>
+                        <p>Đặt $u = \frac{y}{x} \Rightarrow y = ux \Rightarrow y' = u'x + u$. Thay vào PTVP:</p>
+                        $$u'x + u = u + \cos^2(u)$$
+                        $$u'x = \cos^2(u) \Rightarrow \frac{du}{\cos^2(u)} = \frac{dx}{x}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tích Phân Hai Vế</strong></p>
+                        $$\int \frac{du}{\cos^2(u)} = \int \frac{dx}{x}$$
+                        $$\tan(u) = \ln|x| + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 4: Trả lại Biến cũ</strong></p>
+                        <p>Thay $u = \frac{y}{x}$:</p>
+                        $$\tan\left(\frac{y}{x}\right) = \ln|x| + C$$
+                    </div>
+                </details>
+            </div>
+            
+            <!-- Bài 6 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 6:</strong> Giải phương trình: $(x^2 + y^2)dx - 2xy dy = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Chuẩn Thuần Nhất</strong></p>
+                        $$2xy dy = (x^2 + y^2)dx \Rightarrow y' = \frac{x^2 + y^2}{2xy} = \frac{1 + (y/x)^2}{2(y/x)}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Đặt Ẩn Phụ</strong></p>
+                        <p>Đặt $u = \frac{y}{x} \Rightarrow y' = u'x + u$. Thay vào PTVP:</p>
+                        $$u'x + u = \frac{1 + u^2}{2u}$$
+                        $$u'x = \frac{1 + u^2}{2u} - u = \frac{1 - u^2}{2u}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tách Biến và Tích Phân</strong></p>
+                        $$\frac{2u}{1 - u^2} du = \frac{dx}{x}$$
+                        $$-\int \frac{d(1 - u^2)}{1 - u^2} = \int \frac{dx}{x}$$
+                        $$-\ln|1 - u^2| = \ln|x| + \ln|C|$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 4: Rút Gọn Nghiệm Dạng Ẩn</strong></p>
+                        $$\ln\left|\frac{1}{1 - u^2}\right| = \ln|Cx|$$
+                        $$\frac{1}{1 - (y/x)^2} = Cx \Rightarrow \frac{x^2}{x^2 - y^2} = Cx$$
+                        $$x = C(x^2 - y^2) \quad \text{hoặc } x^2 - y^2 = \frac{1}{C} x$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 7 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 7:</strong> Giải phương trình: $y' = \frac{y}{x} - e^{-y/x}$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đặt Ẩn Phụ</strong></p>
+                        <p>Đặt $u = \frac{y}{x} \Rightarrow y' = u'x + u$. Thay vào PTVP:</p>
+                        $$u'x + u = u - e^{-u}$$
+                        $$u'x = -e^{-u} \Rightarrow e^u du = -\frac{dx}{x}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tích Phân Hai Vế</strong></p>
+                        $$\int e^u du = -\int \frac{dx}{x}$$
+                        $$e^u = -\ln|x| + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Trả lại Biến cũ</strong></p>
+                        <p>Thay $u = \frac{y}{x}$:</p>
+                        $$e^{y/x} = C - \ln|x|$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 3: Tuyến Tính Cấp 1 -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">3. Dạng Tuyến Tính Cấp 1 (3 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 8 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 8:</strong> Giải phương trình: $y' + 2y = e^{3x}$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tìm Thừa Số Tích Phân $\mu(x)$</strong></p>
+                        <p>Ta có $p(x) = 2$.</p>
+                        $$\mu(x) = e^{\int 2 dx} = e^{2x}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Nhân PTVP với $\mu(x)$</strong></p>
+                        <p>Nhân PTVP với $e^{2x}$:</p>
+                        $$e^{2x}y' + 2e^{2x}y = e^{2x}e^{3x}$$
+                        $$(e^{2x}y)' = e^{5x}$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tích Phân và Tìm $y$</strong></p>
+                        <p>Tích phân hai vế:</p>
+                        $$e^{2x}y = \int e^{5x} dx = \frac{1}{5} e^{5x} + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 4: Kết Luận Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = \frac{1}{e^{2x}}\left(\frac{1}{5} e^{5x} + C\right) = \frac{1}{5} e^{3x} + C e^{-2x}$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 9 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 9:</strong> Giải phương trình: $x y' - y = x^2 \cos(x)$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Chuẩn</strong></p>
+                        <p>Chia cả hai vế cho $x$:</p>
+                        $$y' - \frac{1}{x} y = x \cos(x)$$
+                        <p>Ta có $p(x) = -\frac{1}{x}$ và $q(x) = x \cos(x)$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Thừa Số Tích Phân $\mu(x)$</strong></p>
+                        $$\int p(x) dx = \int -\frac{1}{x} dx = -\ln|x|$$
+                        $$\mu(x) = e^{-\ln|x|} = e^{\ln|x|^{-1}} = \frac{1}{|x|}$$
+                        <p>Chọn $\mu(x) = \frac{1}{x}$ (cho $x>0$).</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Nhân PTVP với $\mu(x)$</strong></p>
+                        <p>Nhân PTVP chuẩn với $\frac{1}{x}$:</p>
+                        $$\frac{1}{x} y' - \frac{1}{x^2} y = \cos(x)$$
+                        $$\left(\frac{1}{x} y\right)' = \cos(x)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 4: Tích Phân và Tìm $y$</strong></p>
+                        $$\frac{y}{x} = \int \cos(x) dx = \sin(x) + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 5: Kết Luận Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = x \sin(x) + C x$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 10 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 10:</strong> Giải phương trình: $y' + y \cot(x) = 2 \cos(x)$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Tìm Thừa Số Tích Phân $\mu(x)$</strong></p>
+                        <p>Ta có $p(x) = \cot(x)$.</p>
+                        $$\int p(x) dx = \int \cot(x) dx = \ln|\sin(x)|$$
+                        $$\mu(x) = e^{\ln|\sin(x)|} = \sin(x)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Nhân PTVP với $\mu(x)$</strong></p>
+                        <p>Nhân PTVP với $\sin(x)$:</p>
+                        $$\sin(x)y' + y \sin(x)\cot(x) = 2 \cos(x)\sin(x)$$
+                        $$\sin(x)y' + y \cos(x) = \sin(2x)$$
+                        $$(\sin(x)y)' = \sin(2x)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tích Phân và Tìm $y$</strong></p>
+                        $$\sin(x)y = \int \sin(2x) dx = -\frac{1}{2} \cos(2x) + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 4: Kết Luận Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = \frac{C - \frac{1}{2} \cos(2x)}{\sin(x)}$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 4: Bernoulli -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">4. Dạng Bernoulli (3 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 11 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 11:</strong> Giải phương trình: $y' + \frac{1}{x} y = x^2 y^3$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Tuyến Tính</strong></p>
+                        <p>Phương trình có $n=3$. Chia hai vế cho $y^3$. Đặt ẩn phụ $z = y^{1-3} = y^{-2}$. Ta thu được PT Tuyến tính:</p>
+                        $$z' - \frac{2}{x} z = -2x^2 \quad \text{(PT Tuyến Tính theo } z)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Giải PTVP Tuyến Tính theo $z$</strong></p>
+                        <p>$p(x) = -\frac{2}{x}$. Thừa số tích phân $\mu(x) = \frac{1}{x^2}$.</p>
+                        $$\left(\frac{1}{x^2} z\right)' = -2$$
+                        $$\frac{z}{x^2} = -2x + C$$
+                        $$z = C x^2 - 2x^3$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Trả lại Biến cũ và Kết Luận</strong></p>
+                        <p>Thay $z = \frac{1}{y^2}$:</p>
+                        $$\frac{1}{y^2} = C x^2 - 2x^3$$
+                        $$y^2 = \frac{1}{C x^2 - 2x^3}$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 12 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 12:</strong> Giải phương trình: $y' + y = x \sqrt{y}$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Tuyến Tính</strong></p>
+                        <p>Phương trình có $n = \frac{1}{2}$. Đặt $z = y^{1/2}$. Ta thu được PT Tuyến tính:</p>
+                        $$z' + \frac{1}{2} z = \frac{1}{2}x \quad \text{(PT Tuyến Tính theo } z)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Giải PTVP Tuyến Tính theo $z$</strong></p>
+                        <p>$p(x) = \frac{1}{2}$. Thừa số tích phân $\mu(x) = e^{x/2}$.</p>
+                        $$(e^{x/2} z)' = \frac{1}{2}x e^{x/2}$$
+                        $$e^{x/2} z = x e^{x/2} - 2 e^{x/2} + C$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Trả lại Biến cũ và Kết Luận</strong></p>
+                        $$z = x - 2 + C e^{-x/2}$$
+                        $$y^{1/2} = x - 2 + C e^{-x/2}$$
+                        $$y = (x - 2 + C e^{-x/2})^2$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 13 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 13:</strong> Giải phương trình: $x y' + y = y^2 \ln(x)$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Đưa về Dạng Tuyến Tính</strong></p>
+                        <p>Dạng chuẩn Bernoulli: $y' + \frac{1}{x} y = \frac{\ln(x)}{x} y^2$. Đặt $z = y^{-1}$. Ta thu được PT Tuyến tính:</p>
+                        $$z' - \frac{1}{x} z = -\frac{\ln(x)}{x} \quad \text{(PT Tuyến Tính theo } z)$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Giải PTVP Tuyến Tính theo $z$</strong></p>
+                        <p>$p(x) = -\frac{1}{x}$. Thừa số tích phân $\mu(x) = \frac{1}{x}$.</p>
+                        $$\left(\frac{1}{x} z\right)' = -\frac{\ln(x)}{x^2}$$
+                        $$\frac{z}{x} = \frac{\ln(x)}{x} + \frac{1}{x} + C$$
+                        $$z = \ln(x) + 1 + C x$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Trả lại Biến cũ và Kết Luận</strong></p>
+                        <p>Thay $z = \frac{1}{y}$:</p>
+                        $$\frac{1}{y} = \ln(x) + 1 + C x$$
+                        $$y = \frac{1}{\ln(x) + 1 + C x}$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 5: Vi Phân Toàn Phần -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">5. Dạng Vi Phân Toàn Phần (2 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 14 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 14:</strong> Giải phương trình: $(e^y + 2x) dx + (xe^y + 2y) dy = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Kiểm Tra Điều Kiện Vi Phân Toàn Phần</strong></p>
+                        <p>$P = e^y + 2x, Q = xe^y + 2y$. Ta có $\frac{\partial P}{\partial y} = e^y$ và $\frac{\partial Q}{\partial x} = e^y$. Điều kiện thỏa mãn.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Hàm $u(x, y)$</strong></p>
+                        <p>Tích phân $P$ theo $x$: $u(x, y) = x e^y + x^2 + f(y)$.</p>
+                        <p>So sánh $\frac{\partial u}{\partial y}$ với $Q$: $x e^y + f'(y) = x e^y + 2y \Rightarrow f'(y) = 2y$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tìm $f(y)$ và Kết Luận Nghiệm</strong></p>
+                        <p>Tích phân $f'(y)$: $f(y) = y^2$.</p>
+                        <p>Nghiệm tổng quát:</p>
+                        $$x e^y + x^2 + y^2 = C$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 15 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 15 (Đã chỉnh sửa đề):</strong> Giải phương trình: $(2xy + 3)dx + (x^2 + 4y)dy = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Kiểm Tra Điều Kiện Vi Phân Toàn Phần</strong></p>
+                        <p>$P = 2xy + 3, Q = x^2 + 4y$. Ta có $\frac{\partial P}{\partial y} = 2x$ và $\frac{\partial Q}{\partial x} = 2x$. Điều kiện thỏa mãn.</p>
+                        <p class="text-sm italic text-red-600">Lưu ý: Đề gốc không thỏa mãn điều kiện VPTV, đã thay thế bằng PT $(2xy + 3)dx + (x^2 + 4y)dy = 0$ để minh họa.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Hàm $u(x, y)$</strong></p>
+                        <p>Tích phân $P$ theo $x$: $u(x, y) = x^2 y + 3x + f(y)$.</p>
+                        <p>So sánh $\frac{\partial u}{\partial y}$ với $Q$: $x^2 + f'(y) = x^2 + 4y \Rightarrow f'(y) = 4y$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Tìm $f(y)$ và Kết Luận Nghiệm</strong></p>
+                        <p>Tích phân $f'(y)$: $f(y) = 2y^2$.</p>
+                        <p>Nghiệm tổng quát:</p>
+                        $$x^2 y + 3x + 2y^2 = C$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-700 mt-8 mb-3">B. PTVP Cấp 2 Tuyến Tính Thuần Nhất (5 Bài)</h3>
+        
+        <!-- Dạng 1: Hai Nghiệm Thực Phân Biệt -->
+        <h4 class="text-lg font-medium text-gray-700 mt-4 mb-2">1. Trường Hợp Hai Nghiệm Thực Phân Biệt ($\Delta > 0$) (2 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 16 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 16:</strong> Giải phương trình: $y'' - y' - 6y = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                        $$\lambda^2 - \lambda - 6 = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                        $$\Delta = 25 > 0$$
+                        $$\lambda_1 = 3, \quad \lambda_2 = -2$$
+                        <p>Hai nghiệm thực phân biệt.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = C_1 e^{3x} + C_2 e^{-2x}$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 17 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 17:</strong> Giải phương trình: $2y'' + 3y' + y = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                        $$2\lambda^2 + 3\lambda + 1 = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                        $$\Delta = 1 > 0$$
+                        $$\lambda_1 = -1/2, \quad \lambda_2 = -1$$
+                        <p>Hai nghiệm thực phân biệt.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = C_1 e^{-x/2} + C_2 e^{-x}$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 2: Nghiệm Thực Kép -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">2. Trường Hợp Nghiệm Thực Kép ($\Delta = 0$) (2 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 18 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 18:</strong> Giải phương trình: $y'' - 10y' + 25y = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                        $$\lambda^2 - 10\lambda + 25 = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                        <p>Phương trình tương đương với $(\lambda - 5)^2 = 0$.</p>
+                        <p>Nghiệm thực kép: $\lambda = 5$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = (C_1 + C_2 x) e^{5x}$$
+                    </div>
+                </details>
+            </div>
+
+            <!-- Bài 19 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 19:</strong> Giải phương trình: $4y'' + 4y' + y = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                        $$4\lambda^2 + 4\lambda + 1 = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                        <p>Phương trình tương đương với $(2\lambda + 1)^2 = 0$.</p>
+                        <p>Nghiệm thực kép: $\lambda = -1/2$.</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                        $$y(x) = (C_1 + C_2 x) e^{-x/2}$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Dạng 3: Hai Nghiệm Phức Liên Hợp -->
+        <h4 class="text-lg font-medium text-gray-700 mt-6 mb-2">3. Trường Hợp Hai Nghiệm Phức Liên Hợp ($\Delta < 0$) (1 Bài)</h4>
+
+        <div class="space-y-3">
+            <!-- Bài 20 -->
+            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                <p class="font-bold text-gray-900 mb-2"><strong>Bài 20:</strong> Giải phương trình: $y'' + 2y' + 5y = 0$</p>
+                <details>
+                    <summary>▶ Xem Lời Giải Chi Tiết</summary>
+                    <div class="mt-4 solution-step">
+                        <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                        $$\lambda^2 + 2\lambda + 5 = 0$$
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                        $$\Delta' = 1^2 - 1(5) = -4 < 0$$
+                        <p>Hai nghiệm phức liên hợp: $\lambda_{1, 2} = -1 \pm i$ ($\alpha = -1, \beta = 1$).</p>
+                    </div>
+                    <div class="solution-step">
+                        <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                        <p>Áp dụng công thức $y_h(x) = e^{\alpha x} (C_1 \cos(\beta x) + C_2 \sin(\beta x))$:</p>
+                        $$y(x) = e^{-x} (C_1 \cos(x) + C_2 \sin(x))$$
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        
+    </div>
+    <h2 class="text-2xl font-bold text-blue-700 mt-10 mb-4">
+    IV. Bài Tập Vận Dụng PTVP Cấp 2 📚
+</h2>
+
+<p class="mb-6">
+    Giải các Phương trình Vi phân cấp 2 sau:
+</p>
+
+<div class="space-y-6">
+    
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md bg-gray-50">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 20: (Dạng Thuần Nhất - Nghiệm Lượng Giác Phức tạp)</h4>
+        <p class="mt-2 mb-4 text-lg">Giải phương trình: $4y'' + 4y' + 5y = 0$</p>
+
+        <details>
+            <summary class="font-bold text-blue-600 cursor-pointer hover:text-blue-800 transition duration-300">
+                ▶ Xem Lời Giải Chi Tiết
+            </summary>
+            <div class="mt-4 solution-step p-4 border border-green-300 bg-green-50 rounded-md">
+                <p><strong>Bước 1: Lập Phương Trình Đặc Trưng (PTĐT)</strong></p>
+                $$4\lambda^2 + 4\lambda + 5 = 0$$
+                <p><strong>Bước 2: Tìm Nghiệm của PTĐT</strong></p>
+                <p>Tính $\Delta'$:</p>
+                $$\Delta' = 2^2 - 4(5) = -16$$
+                <p>Hai nghiệm phức liên hợp:</p>
+                $$\lambda_{1, 2} = \frac{-2 \pm 4i}{4} = -\frac{1}{2} \pm i$$
+                <p>Ta có $\mathbf{\alpha = -\frac{1}{2}}$ và $\mathbf{\beta = 1}$.</p>
+                <p><strong>Bước 3: Viết Nghiệm Tổng Quát</strong></p>
+                <p>Áp dụng công thức $y_h(x) = e^{\alpha x} (C_1 \cos(\beta x) + C_2 \sin(\beta x))$:</p>
+                $$y(x) = e^{-\frac{1}{2} x} (C_1 \cos(x) + C_2 \sin(x))$$
+            </div>
+        </details>
+    </div>
+
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 21: (Dạng Không Thuần Nhất - Đa thức)</h4>
+        <p class="mt-2 mb-4 text-lg">Tìm nghiệm tổng quát của PTVP: $y'' - 4y' + 3y = x + 2$</p>
+
+        <button onclick="toggleSolution('sol21')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Xem Lời Giải
+        </button>
+        
+        <div id="sol21" class="hidden mt-4 p-4 border border-green-300 bg-green-50 rounded-md">
+            <h5 class="font-bold text-green-700 mb-2">Lời Giải Bài 21:</h5>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>B1: Nghiệm thuần nhất ($y_h$):</strong> PTĐT $\lambda^2 - 4\lambda + 3 = 0$. Nghiệm: $\lambda_1 = 1, \lambda_2 = 3$.
+                    $$y_h(x) = C_1 e^x + C_2 e^{3x}$$
+                </li>
+                <li>
+                    <strong>B2: Nghiệm riêng ($y_p$):</strong> $f(x) = x + 2$. $\lambda=0$ không phải nghiệm $\Rightarrow k=0$.
+                    Giả sử $y_p = Ax + B$. Thay vào, ta đồng nhất hệ số: $A = \frac{1}{3}$; $B = \frac{10}{9}$.
+                    $$y_p(x) = \frac{1}{3}x + \frac{10}{9}$$
+                </li>
+                <li>
+                    <strong>B3: Kết luận:</strong>
+                    $$y(x) = C_1 e^x + C_2 e^{3x} + \frac{1}{3}x + \frac{10}{9}$$
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 22: (Dạng Không Thuần Nhất - Hàm mũ)</h4>
+        <p class="mt-2 mb-4 text-lg">Tìm nghiệm tổng quát của PTVP: $y'' + y' - 2y = 4e^{2x}$</p>
+
+        <button onclick="toggleSolution('sol22')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Xem Lời Giải
+        </button>
+        
+        <div id="sol22" class="hidden mt-4 p-4 border border-green-300 bg-green-50 rounded-md">
+            <h5 class="font-bold text-green-700 mb-2">Lời Giải Bài 22:</h5>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>B1: Nghiệm thuần nhất ($y_h$):</strong> PTĐT $\lambda^2 + \lambda - 2 = 0$. Nghiệm: $\lambda_1 = 1, \lambda_2 = -2$.
+                    $$y_h(x) = C_1 e^x + C_2 e^{-2x}$$
+                </li>
+                <li>
+                    <strong>B2: Nghiệm riêng ($y_p$):</strong> $f(x) = 4e^{2x}$. $\alpha=2$ không phải nghiệm $\Rightarrow k=0$.
+                    Giả sử $y_p = A e^{2x}$. Thay vào, ta được $A = 1$.
+                    $$y_p(x) = e^{2x}$$
+                </li>
+                <li>
+                    <strong>B3: Kết luận:</strong>
+                    $$y(x) = C_1 e^x + C_2 e^{-2x} + e^{2x}$$
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 23: (Dạng Không Thuần Nhất - Cộng hưởng kép)</h4>
+        <p class="mt-2 mb-4 text-lg">Tìm nghiệm tổng quát của PTVP: $y'' - 4y' + 4y = e^{2x}$</p>
+
+        <button onclick="toggleSolution('sol23')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Xem Lời Giải
+        </button>
+        
+        <div id="sol23" class="hidden mt-4 p-4 border border-green-300 bg-green-50 rounded-md">
+            <h5 class="font-bold text-green-700 mb-2">Lời Giải Bài 23:</h5>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>B1: Nghiệm thuần nhất ($y_h$):</strong> PTĐT $\lambda^2 - 4\lambda + 4 = 0$. Nghiệm kép: $\lambda_1 = \lambda_2 = 2$.
+                    $$y_h(x) = (C_1 + C_2 x) e^{2x}$$
+                </li>
+                <li>
+                    <strong>B2: Nghiệm riêng ($y_p$):</strong> $f(x) = e^{2x}$. $\alpha=2$ là nghiệm kép $\Rightarrow k=2$.
+                    Giả sử $y_p = A x^2 e^{2x}$. Thay vào, ta được $A = \frac{1}{2}$.
+                    $$y_p(x) = \frac{1}{2} x^2 e^{2x}$$
+                </li>
+                <li>
+                    <strong>B3: Kết luận:</strong>
+                    $$y(x) = (C_1 + C_2 x) e^{2x} + \frac{1}{2} x^2 e^{2x}$$
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 24: (Dạng Không Thuần Nhất - Cộng hưởng lượng giác)</h4>
+        <p class="mt-2 mb-4 text-lg">Tìm nghiệm tổng quát của PTVP: $y'' + 4y = \sin(2x)$</p>
+
+        <button onclick="toggleSolution('sol24')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Xem Lời Giải
+        </button>
+        
+        <div id="sol24" class="hidden mt-4 p-4 border border-green-300 bg-green-50 rounded-md">
+            <h5 class="font-bold text-green-700 mb-2">Lời Giải Bài 24:</h5>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>B1: Nghiệm thuần nhất ($y_h$):</strong> PTĐT $\lambda^2 + 4 = 0$. Nghiệm $\lambda = \pm 2i$. $\alpha=0, \beta=2$.
+                    $$y_h(x) = C_1 \cos(2x) + C_2 \sin(2x)$$
+                </li>
+                <li>
+                    <strong>B2: Nghiệm riêng ($y_p$):</strong> $f(x) = \sin(2x)$. $\lambda = \pm 2i$ là nghiệm đơn $\Rightarrow k=1$.
+                    Giả sử $y_p = x [A \cos(2x) + B \sin(2x)]$. Thay vào và đồng nhất hệ số, ta được $A = -\frac{1}{4}, B = 0$.
+                    $$y_p(x) = -\frac{1}{4} x \cos(2x)$$
+                </li>
+                <li>
+                    <strong>B3: Kết luận:</strong>
+                    $$y(x) = C_1 \cos(2x) + C_2 \sin(2x) - \frac{1}{4} x \cos(2x)$$
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="p-4 border border-gray-200 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-gray-800">Bài 25: (Dạng Không Thuần Nhất - Lượng giác)</h4>
+        <p class="mt-2 mb-4 text-lg">Tìm nghiệm tổng quát của PTVP: $y'' + 2y' + 5y = 10 \cos(x)$</p>
+
+        <button onclick="toggleSolution('sol25')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Xem Lời Giải
+        </button>
+        
+        <div id="sol25" class="hidden mt-4 p-4 border border-green-300 bg-green-50 rounded-md">
+            <h5 class="font-bold text-green-700 mb-2">Lời Giải Bài 25:</h5>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>B1: Nghiệm thuần nhất ($y_h$):</strong> PTĐT $\lambda^2 + 2\lambda + 5 = 0$. Nghiệm $\lambda = -1 \pm 2i$.
+                    $$y_h(x) = e^{-x} (C_1 \cos(2x) + C_2 \sin(2x))$$
+                </li>
+                <li>
+                    <strong>B2: Nghiệm riêng ($y_p$):</strong> $f(x) = 10 \cos(x)$. $\lambda = \pm i$ không phải nghiệm $\Rightarrow k=0$.
+                    Giả sử $y_p = A \cos(x) + B \sin(x)$. Thay vào và giải hệ, ta được $A = 2, B = 1$.
+                    $$y_p(x) = 2 \cos(x) + \sin(x)$$
+                </li>
+                <li>
+                    <strong>B3: Kết luận:</strong>
+                    $$y(x) = e^{-x} (C_1 \cos(2x) + C_2 \sin(2x)) + 2 \cos(x) + \sin(x)$$
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSolution(id) {
+        const solutionDiv = document.getElementById(id);
+        const button = solutionDiv.previousElementSibling; 
+        
+        if (solutionDiv.classList.contains('hidden')) {
+            solutionDiv.classList.remove('hidden');
+            button.textContent = 'Ẩn Lời Giải';
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            button.classList.add('bg-red-500', 'hover:bg-red-600');
+        } else {
+            solutionDiv.classList.add('hidden');
+            button.textContent = 'Xem Lời Giải';
+            button.classList.remove('bg-red-500', 'hover:bg-red-600');
+            button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+        }
+    }
+</script>
+<script>
+    function toggleSolution(id) {
+        const solutionDiv = document.getElementById(id);
+        const button = solutionDiv.previousElementSibling; 
+        
+        if (solutionDiv.classList.contains('hidden')) {
+            solutionDiv.classList.remove('hidden');
+            button.textContent = 'Ẩn Lời Giải';
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            button.classList.add('bg-red-500', 'hover:bg-red-600');
+        } else {
+            solutionDiv.classList.add('hidden');
+            button.textContent = 'Xem Lời Giải';
+            button.classList.remove('bg-red-500', 'hover:bg-red-600');
+            button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+        }
+    }
+</script>
+    <footer class="bg-gray-800 text-white shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between">
+
+            <!-- KHỐI GÓC DƯỚI BÊN TRÁI: Design by Sơn Cris -->
+            <div class="design-by-container mb-4 md:mb-0">
+                <p class="design-by-text text-sm text-gray-400">
+                    Design by <b class="text-white font-semibold tracking-wider">Sơn Cris</b>
+                </p>
+            </div>
+
+            <!-- KHỐI GÓC DƯỚI BÊN PHẢI: 3 thông tin liên hệ theo hàng ngang -->
+            <div class="contact-links-container flex flex-wrap justify-center gap-3 sm:gap-4">
+                
+                <!-- Phone Link (Xanh Green) -->
+                <a href="tel:0327208690" title="Gọi 0327208690" class="footer-link phone-link flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+                    <!-- Icon Điện thoại -->
+                    <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M164.9 24.6c-48 0-87.1 39.1-87.1 87.1v278.7c0 48 39.1 87.1 87.1 87.1h182.2c48 0 87.1-39.1 87.1-87.1V111.7c0-48-39.1-87.1-87.1-87.1H164.9zM256 464c-15.4 0-27.9-12.5-27.9-27.9s12.5-27.9 27.9-27.9 27.9 12.5 27.9 27.9-12.5 27.9-27.9 27.9zm135.2-348.8H122.9V392h268.3V115.2z"/></svg>
+                    <span>0327208690</span>
+                </a>
+                
+                <!-- Instagram Link (Hồng) -->
+                <a href="https://www.instagram.com/son_cris3012/" target="_blank" title="Instagram" class="footer-link instagram-link flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+                    <!-- Icon Instagram -->
+                    <!-- Lưu ý: Đã thay thế SVG của bạn bằng SVG FontAwesome chuẩn 512x512 để tương thích tốt hơn -->
+                    <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 12.6C99.2-22.3-22.3 99.2 12.6 224.1l11.2 11.2c19.3 19.3 46.4 30.1 74.5 30.1h145.4c28.1 0 55.2-10.8 74.5-30.1l11.2-11.2C485.6 99.2 364.1-22.3 239.1 12.6L224.1 27.7l-15 42.1c-14.4 40.3-43.7 70.8-82.6 86.6L48.2 168.1C25.3 177.1 8.5 197.6 8.5 221v82c0 23.4 16.8 43.9 39.7 52.9l84.4 32.1c38.9 15.8 68.2 46.3 82.6 86.6l15 42.1 15-42.1c14.4-40.3 43.7-70.8 82.6-86.6l84.4-32.1c22.9-9 39.7-29.5 39.7-52.9v-82c0-23.4-16.8-43.9-39.7-52.9l-84.4-32.1c-38.9-15.8-68.2-46.3-82.6-86.6l-15-42.1L224.1 27.7zM169.1 296.8c-29.4-29.4-29.4-77 0-106.4s77-29.4 106.4 0 29.4 77 0 106.4-77 29.4-106.4 0zm53.2-61.9c-15.5-15.5-15.5-40.7 0-56.2s40.7-15.5 56.2 0 15.5 40.7 0 56.2-40.7 15.5-56.2 0zm117.8 7.3c15.2-15.2 15.2-39.8 0-55s-39.8-15.2-55 0c-15.2 15.2-15.2 39.8 0 55s39.8 15.2 55 0z"/></svg>
+                    <span>Instagram</span>
+                </a>
+                
+                <!-- Facebook Link (Xanh Blue) -->
+                <a href="https://web.facebook.com/sonsadboiz.12" target="_blank" title="Facebook" class="footer-link facebook-link flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+                    <!-- Icon Facebook -->
+                    <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.37h-51.2v-60.3h51.2v-44.4a76.43 76.43 0 0 1 76.4-76.4h37.7v59.7h-37.7c-25.1 0-25.1 9.2-25.1 25.4v40.7h63.2l-10.1 60.3h-53.1V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"/></svg>
+                    <span>Facebook</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <a href="/">
+    <img 
+        src="https://upload.wikimedia.org/wikipedia/vi/0/0e/Logo_MTA_new.png" 
+        alt="Logo MTA" 
+        class="website-logo" 
+        id="mta-logo"
+    >
+</a>
+
+<style>
+    #mta-logo {
+        /* Định vị trí tuyệt đối so với khung nhìn (viewport) */
+        position: fixed; 
+        
+        /* Cố định ở góc trái trên cùng */
+        top: 10px;    /* Khoảng cách từ mép trên */
+        left: 10px;   /* Khoảng cách từ mép trái */
+        
+        /* Đặt kích thước */
+        width: 100px;
+        height: 100px;
+        
+        /* Đảm bảo logo luôn nằm trên các nội dung khác */
+        z-index: 1000; 
+        
+        /* Đảm bảo hình ảnh vừa vặn và không bị méo */
+        object-fit: contain; 
+    }
+</style>
+<a href="https://inict.mta.edu.vn/">
+    <img 
+        src="https://inict.mta.edu.vn/static/media/user_logo.57d08b09.png" 
+        alt="Logo INICT" 
+        id="inict-logo-right"
+    >
+</a>
+
+<style>
+    #inict-logo-right {
+        /* Cố định vị trí so với khung nhìn (viewport) */
+        position: fixed; 
+        
+        /* Cố định ở góc phải trên cùng */
+        top: 10px;    /* Khoảng cách từ mép trên */
+        right: 10px;  /* Khoảng cách từ mép phải */
+        
+        /* Đặt kích thước */
+        width: 100px;
+        height: 100px;
+        
+        /* Đảm bảo logo luôn nằm trên các nội dung khác */
+        z-index: 1000; 
+        
+        /* Đảm bảo hình ảnh vừa vặn */
+        object-fit: contain; 
+    }
+</style>
+</body>
+</html>
